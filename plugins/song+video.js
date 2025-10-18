@@ -1,6 +1,6 @@
 const { cmd } = require("../command");
 const yts = require("yt-search");
-const axios = require("api-dylux");
+const axios = require("axios");
 
 cmd(
   {
