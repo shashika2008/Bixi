@@ -1,91 +1,106 @@
-const {cmd , commands} = require('../command')
-const fg = require('api-dylux')
-const yts = require('yt-search')
-cmd({
+const { cmd } = require("../command");
+const yts = require("yt-search");
+const axios = require("api-dylux");
+
+cmd(
+  {
     pattern: "song",
-    desc: "song download",
+    desc: "Download YouTube Audio",
     category: "download",
-    filename: __filename
-},
-async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
-try{
-if(!q) return("please enter a url or song name")
-const search = await yts(q)
-const data = search.videos[0];
-const url = data.url
+    filename: __filename,
+  },
+  async (malvin, mek, m, { from, args, reply }) => {
+    try {
+      const q = args.join(" ");
+      if (!q) return reply("*Provide a name or a YouTube link.* 🎵❤️");
 
-let desc = ' /)  /)  ~ ┏━━━━━━━━━━━━━━━━━┓
-( •-• )  ~ ♡ 𝐘𝐓 𝐒𝐎𝐍𝐆 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 ♡
-/づづ ~ ┗━━━━━━━━━━━━━━━━━┛    
-╭━━━━━━━━━●●►
-┢😊 title: ${data.title}
-┢🥴 time: ${data.timestump}
-┢😑 uploaded: ${audio.ago}
-┢😐 views: ${audio.views}
-┢🥰 likes: ${audio.likes}
-╰━━━━━━━━●●►
-   » [𒆜 agni 𒆜] «
-  0:00 ─〇───── 0:47
-b ⇄   ◃◃   ⅠⅠ   ▹▹   ↻
-'
-await conn.sendMessage(from,{image:{url: data.thumbnail}, Captain:desc},{quoted:mek}):
-//download audio song
+      // 1) Find the URL
+      let url = q;
+      try {
+        url = new URL(q).toString();
+      } catch {
+        const s = await yts(q);
+        if (!s?.videos?.length) return reply("❌ No videos found!");
+        url = s.videos[0].url;
+      }
 
-let down = await fg.yta(url)
-let downloadurl = down.dl_url
+      // 2) Validate URL
+      if (!url.includes("youtube.com") && !url.includes("youtu.be")) {
+        return reply("❌ Invalid YouTube URL!");
+      }
 
-//audio massage
-await conn.sendMessage(from,{audio: {url:downloadurl},mimetype:"audio/mpeg"},{quoted:mek})
-await conn.sendMessage(from,{document: {url:downloadurl},mimetype:"audio/mpeg",fileName:data.title + ".mp3", caption:" by agni bot "},{quoted:mek})
+      // 3) Fetch metadata
+      let info;
+      try {
+        const searchResult = await yts(url);
+        if (!searchResult?.videos?.length) {
+          return reply("❌ Failed to fetch video metadata!");
+        }
+        info = searchResult.videos[0];
+      } catch (e) {
+        console.error("Metadata fetch error:", e);
+        return reply("❌ Error fetching video metadata: " + e.message);
+      }
 
-}catch(e){
-console.log(e
-reply('${e}')
-}
-})
+      // 4) Send metadata + thumbnail
+      const desc = `
+🧩 * AUDIO DOWNLOADER* 🧩
 
+📌 *Title:* ${info.title || "Unknown"}
+⏱️ *Uploaded:* ${info.timestamp || "N/A"} (${info.ago || "N/A"})
+👀 *Views:* ${info.views?.toLocaleString() || "N/A"}
+🔗 *Download URL:* ${info.url || url}
 
-//=====video downloader======
+━━━━━━━━━━━━━━━━━━
+*Powered by AGNi bot🌟*
+      `.trim();
 
-cmd({
-    pattern: "video",
-    desc: "video download",
-    category: "download",
-    filename: __filename
-},
-async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
-try{
-if(!q) return("please enter a url or video name")
-const search = await yts(q)
-const data = search.videos[0];
-const url = data.url
+      await malvin.sendMessage(
+        from,
+        { image: { url: info.thumbnail || "https://i.ibb.co/SDWZFh23/malvin-xd.jpg" }, caption: desc },
+        { quoted: mek }
+      );
 
-let desc = ' /)  /)  ~ ┏━━━━━━━━━━━━━━━━━┓
-( •-• )  ~ ♡   𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 ♡
-/づづ ~ ┗━━━━━━━━━━━━━━━━━┛    
-╭━━━━━━━━━●●►
-┢😊 𝐓𝐢𝐭𝐥𝐞: ${data.title}
-┢🥴 𝐓𝐢𝐦𝐞: ${data.timestump}
-┢😑 𝐔𝐩𝐥𝐨𝐚𝐝𝐞𝐝: ${audio.ago}
-┢😐 𝐕𝐢𝐞𝐰𝐬: ${audio.views}
-┢🥰 𝐋𝐢𝐤𝐞𝐬: ${audio.likes}
-╰━━━━━━━━●●►
-   » [𒆜 agni 𒆜] «
-  0:00 ─〇───── 0:47
-b ⇄   ◃◃   ⅠⅠ   ▹▹   ↻
-'
-await conn.sendMessage(from,{image:{url: data.thumbnail}, Captain:desc},{quoted:mek}):
-//download video
+      // 5) Audio download helper
+      const downloadAudio = async (videoUrl, quality = "mp3") => {
+        const apiUrl = `https://p.oceansaver.in/ajax/download.php?format=${quality}&url=${encodeURIComponent(
+          videoUrl
+        )}&api=dfcb6d76f2f6a9894gjkege8a4ab232222`;
 
-let down = await fg.ytv(url)
-let downloadurl = down.dl_url
+        const res = await axios.get(apiUrl);
+        if (!res.data.success) throw new Error("Failed to fetch audio details.");
 
-//video massage
-await conn.sendMessage(from,{video: {url:downloadurl},mimetype:"video/mp4"},{quoted:mek})
-await conn.sendMessage(from,{document: {url:downloadurl},mimetype:"video/mp4",fileName:data.title + ".mp4",caption:" by agni bot"},{quoted:mek})
+        const { id, title } = res.data;
+        const progressUrl = `https://p.oceansaver.in/ajax/progress.php?id=${id}`;
 
-}catch(e){
-console.log(e
-reply('${e}')
-}
-})
+        // Poll until ready
+        while (true) {
+          const prog = (await axios.get(progressUrl)).data;
+          if (prog.success && prog.progress === 1000) {
+            const audio = await axios.get(prog.download_url, { responseType: "arraybuffer" });
+            return { buffer: audio.data, title: title || info.title || "audio" };
+          }
+          await new Promise((r) => setTimeout(r, 5000));
+        }
+      };
+
+      // 6) Download + send
+      const { buffer, title } = await downloadAudio(url);
+      await malvin.sendMessage(
+        from,
+        {
+          audio: buffer,
+          mimetype: "audio/mpeg",
+          ptt: false,
+          fileName: `${title}.mp3`,
+        },
+        { quoted: mek }
+      );
+
+      reply("*Thanks for using my MP3 bot!* 🎵");
+    } catch (e) {
+      console.error("Error:", e);
+      reply(`❌ Error: ${e.message}`);
+    }
+  }
+);
