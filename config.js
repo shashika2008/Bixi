@@ -39,6 +39,7 @@ module.exports = {
 🔥  ＡＧＮＩ 𝐈𝐒 online  🔥  
 🖤 “powered by shashika dilshan” 🖤
 `,
+    OWNER_NAME: process.env.OWNER_NAME || "Shashika Dilshan",
     PREFIX: process.env.PREFIX || ".",
     MODE: process.env.MODE || "public",
     AUTO_VOICE: process.env.AUTO_VOICE || "false",
