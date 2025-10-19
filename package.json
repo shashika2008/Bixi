@@ -28,7 +28,7 @@
     "moment": "2.30.1",
     "@mrnima/tiktok-downloader":"1.0.0",
     "@mrnima/facebook-downloader":"1.0.0",
-    "@dark-yasiya/yt-dl.js": "1.0.5",
+    "@@dark-yasiya/scrap": "1.0.1",
     "wa_set_pkg": "1.0.5",
     "wa-sticker-formatter": "^4.4.4"
   }
