@@ -1,4 +1,4 @@
-const { lite } = require('../lite');
+const { cmd } = require('../command');
 const axios = require('axios');
 
 lite({
