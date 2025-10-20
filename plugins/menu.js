@@ -41,43 +41,51 @@ cmd(
         }
       }
 
-      const madeMenu = `𝐘𝐨𝐨  ${user}
-*Wᴇʟᴄᴏᴍᴇ Tᴏ AGNI* 
+      const madeMenu = `
+      
+╭─❍ *${config.BOT_NAME} MENU*
+│ 👤 User: ${pushname}
+│ 🌐 Mode: [${config.MODE}]
+│ ✨ Prefix: [${config.PREFIX}]
+│ 📦 Total Commands: ${commands.length}
+│ 📌 Version: ${config.version} BETA
+╰─────────────✦
 
-╭─「 🛠️ ꜱᴛᴀᴛᴜꜱ ᴅᴇᴛᴀɪʟꜱ 」 
-│🤖 *Bot*: AGNI
-│🙋‍♂️ *User*: ${user}
-│📱 *Owner*: ${owner}
-│⏳ *Uptime*: ${uptime}
-│💾 *Ram*: ${usedRam} / ${totalRam}
-│🛎️ *Prefix*: ${config.PREFIX}
-╰──────────●●►
+┌───『 🛠️ Admin Commands 』
+${menu.group || '│ (No commands found)'}
+${menu.main || ''}
+${menu.other || ''}
+└─────────────✦
 
-╭─「 📜 ᴍᴇɴᴜ ᴏᴘᴛɪᴏɴꜱ 」 
-│ ⚙️ *MAIN COMMANDS*
-│   ➥ .alive 
-│   ➥ .menu 
-│   ➥ .ai <text> 
-│   ➥ .system 
-│   ➥ .owner 
-│
-│ 📥 *DOWNLOAD COMMANDS*
-│   ➥ .song <text> 
-│   ➥ .video <text> 
-│   ➥ .fb <link> 
-│
-│ 👑 *OWNER COMMANDS*
-│   ➥ .restart 
-│   ➥ .update 
-│
-│ 🔁 *CONVERT COMMANDS*
-│   ➥ .sticker <reply img> 
-│   ➥ .img <reply sticker> 
-│   ➥ .tr <lang> <text>
-│   ➥ .tts <text> 
-╰──────────●●►
+┌───『 📥 Downloader Commands 』
+${menu.download || '│ (No commands found)'}
+└─────────────✦
 
-> *POWERED BY AGNI*
+┌───『 🧑‍💻 Owner Commands 』
+${menu.owner || '│ (No commands found)'}
+└─────────────✦
+
+┌───『 🧠 AI Commands 』
+${menu.ai || '│ (No commands found)'}
+└─────────────✦
+
+┌───『 ✨ Logo/Anime Commands 』
+${menu.anime || '│ (No commands found)'}
+└─────────────✦
+
+┌───『 🔄 Convert Commands 』
+${menu.convert || '│ (No commands found)'}
+└─────────────✦
+
+┌───『 🎭 Reaction Commands 』
+${menu.reaction || '│ (No commands found)'}
+└─────────────✦
+
+┌───『 🎉 Fun Commands 』
+${menu.fun || '│ (No commands found)'}
+└─────────────✦
+
+> ${config.DESCRIPTION}
 `;
 
       await malvin.sendMessage(
@@ -97,3 +105,4 @@ cmd(
     }
   }
 );
+                        
