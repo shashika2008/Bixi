@@ -2,7 +2,7 @@ const { cmd } = require("../commands");
 const { fetchGif, gifToVideo } = require("../lib/fetchGif");
 const axios = require("axios");
 
-lite(
+cmd(
     {
         pattern: "cry",
         desc: "Send a crying reaction GIF.",
@@ -42,7 +42,7 @@ lite(
     }
 );
 
-lite(
+cmd(
     {
         pattern: "cuddle",
         desc: "Send a cuddle reaction GIF.",
@@ -82,7 +82,7 @@ lite(
     }
 );
 
-lite(
+cmd(
     {
         pattern: "bully",
         desc: "Send a bully reaction GIF.",
@@ -122,7 +122,7 @@ lite(
     }
 );
 
-lite(
+cmd(
     {
         pattern: "hug",
         desc: "Send a hug reaction GIF.",
@@ -163,7 +163,7 @@ lite(
 );
 
 
-lite(
+cmd(
     {
         pattern: "awoo",
         desc: "Send an awoo reaction GIF.",
@@ -203,7 +203,7 @@ lite(
     }
 );
 
-lite(
+cmd(
     {
         pattern: "lick",
         desc: "Send a lick reaction GIF.",
@@ -238,7 +238,7 @@ lite(
     }
 );
   
-lite(
+cmd(
     {
         pattern: "pat",
         desc: "Send a pat reaction GIF.",
@@ -278,7 +278,7 @@ lite(
     }
 );
 
-lite(
+cmd(
     {
         pattern: "smug",
         desc: "Send a smug reaction GIF.",
@@ -318,7 +318,7 @@ lite(
     }
 );
 
-lite(
+cmd(
     {
         pattern: "bonk",
         desc: "Send a bonk reaction GIF.",
@@ -359,7 +359,7 @@ lite(
 );
 
 
-lite(
+cmd(
     {
         pattern: "yeet",
         desc: "Send a yeet reaction GIF.",
@@ -399,7 +399,7 @@ lite(
     }
 );
 
-lite(
+cmd(
     {
         pattern: "blush",
         desc: "Send a blush reaction GIF.",
@@ -439,7 +439,7 @@ lite(
     }
 );  
   
-lite(
+cmd(
     {
         pattern: "handhold",
         desc: "Send a hand-holding reaction GIF.",
@@ -480,7 +480,7 @@ lite(
 );
 
 
-lite(
+cmd(
     {
         pattern: "highfive",
         desc: "Send a high-five reaction GIF.",
@@ -520,7 +520,7 @@ lite(
     }
 );  
 
-lite(
+cmd(
     {
         pattern: "nom",
         desc: "Send a nom reaction GIF.",
@@ -560,7 +560,7 @@ lite(
     }
 );
 
-lite(
+cmd(
     {
         pattern: "wave",
         desc: "Send a wave reaction GIF.",
@@ -600,7 +600,7 @@ lite(
     }
 );
 
-lite(
+cmd(
     {
         pattern: "smile",
         desc: "Send a smile reaction GIF.",
@@ -640,7 +640,7 @@ lite(
     }
 );
 
-lite(
+cmd(
     {
         pattern: "wink",
         desc: "Send a wink reaction GIF.",
@@ -680,7 +680,7 @@ lite(
     }
 );
 
-lite(
+cmd(
     {
         pattern: "happy",
         desc: "Send a happy reaction GIF.",
@@ -720,7 +720,7 @@ lite(
     }
 );
 
-lite(
+cmd(
     {
         pattern: "glomp",
         desc: "Send a glomp reaction GIF.",
@@ -760,7 +760,7 @@ lite(
     }
 );
 
-lite(
+cmd(
     {
         pattern: "bite",
         desc: "Send a bite reaction GIF.",
@@ -800,7 +800,7 @@ lite(
     }
 );
 
-lite(
+cmd(
     {
         pattern: "poke",
         desc: "Send a poke reaction GIF.",
@@ -841,7 +841,7 @@ lite(
 );
   
   
-lite(
+cmd(
     {
         pattern: "cringe",
         desc: "Send a cringe reaction GIF.",
@@ -882,7 +882,7 @@ lite(
 );
 
 
-lite(
+cmd(
     {
         pattern: "dance",
         desc: "Send a dance reaction GIF.",
@@ -924,7 +924,7 @@ lite(
 
 
   
-lite(
+cmd(
     {
         pattern: "kill",
         desc: "Send a kill reaction GIF.",
@@ -968,7 +968,7 @@ lite(
     }
 );
 
-lite(
+cmd(
     {
         pattern: "slap",
         desc: "Send a slap reaction GIF.",
@@ -1012,7 +1012,7 @@ lite(
     }
 );
 
-lite(
+cmd(
     {
         pattern: "kiss",
         desc: "Send a kiss reaction GIF.",
