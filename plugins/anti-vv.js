@@ -1,4 +1,4 @@
-const { lite } = require("../lite");
+const { cmd } = require("../command");
 
 lite({
   pattern: "vv",
