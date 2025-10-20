@@ -7,43 +7,42 @@ cmd(
     alias: ["dev", "creator"],
     desc: "Show developer info with image and intro text",
     category: "info",
-    react: "👨‍💻",
+    react: "☠️",
     filename: __filename,
     fromMe: false,
   },
   async (malvin, mek, m, { reply }) => {
     const developerInfo = {
-      name: "Malvin King",
-      number: "wa.me/263714757857",
-      github: "https://github.com/XdKing2",
+      name: "Shashika dilshan",
+      number: "wa.me/94705104830",
       note: "බොට් එක ගැන support එකක් ඕන නම් msg එකක් දාන්න!",
       image:
-        "https://i.ibb.co/SDWZFh23/malvin-xd.jpg",
+        "https://files.catbox.moe/qd7i1d.jpeg",
     };
 
     // STEP 1: Intro reaction (optional)
     await malvin.sendMessage(mek.key.remoteJid, {
-      react: { text: "👨‍💻", key: mek.key },
+      react: { text: "☠️", key: mek.key },
     });
 
     // STEP 2: Intro Message
     await malvin.sendMessage(
       mek.key.remoteJid,
-      { text: "👋 *HEY I AM THE DEVELOPER!*" },
+      { text: "🤫 *HEY I AM THE DEVELOPER!*" },
       { quoted: mek }
     );
 
     // STEP 3: Developer Info with Image
     const caption = `
-*👨‍💻 Developer Info*
+*𝐀𝐆𝐍𝐈 Developer Info*
 
-👤 *Name:* ${developerInfo.name} 
+❦👤 *Name:* ${developerInfo.name} 
 
-📞 *Contact:* ${developerInfo.number}
+❦📞 *Contact:* ${developerInfo.number}
 
-💻 *GitHub:* ${developerInfo.github}
+❦💻 *GitHub:* ${developerInfo.github}
 
-📝 *Note:* ${developerInfo.note}
+❦📝 *Note:* ${developerInfo.note}
     `.trim();
 
     await malvin.sendMessage(
