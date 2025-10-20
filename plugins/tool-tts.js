@@ -1,6 +1,6 @@
 const axios = require('axios');
-const config = require('../settings')
-const {lite , commands} = require('../lite')
+const config = require('../config')
+const {lite , commands} = require('../commands')
 const googleTTS = require('google-tts-api')
 
 lite({
