@@ -8,29 +8,28 @@ const {
   Browsers,
 } = require("@whiskeysockets/baileys");
 
-const l = console.log;
-const {
-  getBuffer,
-  getGroupAdmins,
-  getRandom,
-  h2k,
-  isUrl,
-  Json,
-  runtime,
-  sleep,
-  fetchJson,
-} = require("./lib/functions");
-const fs = require("fs");
-const P = require("pino");
-const config = require("./config");
-const qrcode = require("qrcode-terminal");
-const util = require("util");
-const { sms, downloadMediaMessage } = require("./lib/msg");
-const axios = require("axios");
-const { File } = require("megajs");
-const prefix = config.PREFIX; 
-const os = require('os'); 
-const moment = require('moment'); 
+
+const l = console.log
+const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson } = require('./lib/functions')
+const { AntiDelDB, initializeAntiDeleteSettings, setAnti, getAnti, getAllAntiDeleteSettings, saveContact, loadMessage, getName, getChatSummary, saveGroupMetadata, getGroupMetadata, saveMessageCount, getInactiveGroupMembers, getGroupMembersMessageCount, saveMessage } = require('./data')
+const fs = require('fs')
+const ff = require('fluent-ffmpeg')
+const P = require('pino')
+const config = require('./config')
+const GroupEvents = require('./lib/groupevents')
+const qrcode = require('qrcode-terminal')
+const StickersTypes = require('wa-sticker-formatter')
+const util = require('util')
+const { sms, downloadMediaMessage, AntiDelete } = require('./lib')
+const FileType = require('file-type')
+const axios = require('axios')
+const { File } = require('megajs')
+const { fromBuffer } = require('file-type')
+const bodyparser = require('body-parser')
+const os = require('os')
+const Crypto = require('crypto')
+const path = require('path')
+const prefix = config.PREFIX
 
 
 const ownerNumber = config.OWNER_NUM;
@@ -39,7 +38,7 @@ const ownerNumber = config.OWNER_NUM;
 if (!fs.existsSync(__dirname + "/session/creds.json")) {
   if (!config.SESSION_ID)
     return console.log("Please add your session to SESSION_ID env !!");
-  const sessdata = config.SESSION_ID;
+  const sessdata = config.SESSION_ID.replace("suho~", '')
   const filer = File.fromURL(`https://mega.nz/file/${sessdata}`);
   filer.download((err, data) => {
     if (err) throw err;
@@ -58,7 +57,7 @@ const port = process.env.PORT || 8000;
 async function connectToWA() {
   //===========================
 
-  console.log("Connecting MALU XD");
+  console.log("Connecting agni");
   const { state, saveCreds } = await useMultiFileAuthState(
     __dirname + "/session/"
   );
@@ -92,32 +91,15 @@ async function connectToWA() {
     console.log(" installed successful ✅");
     console.log(" connected to whatsapp ✅");
 
-    let up = `𝗠𝗔𝗟𝗨 𝗫𝗗 connected successful ✅`;
-    let up1 = `Hello ᴍᴀʟᴠɪɴ ᴛᴇᴄʜ🪀, I made bot successful`;
+    let up = `agni connected successful ✅`;
+    let up1 = `Hello user🪀, I made bot successful`;
 
     malvin.sendMessage(ownerNumber + "@s.whatsapp.net", {
       image: {
-        url: `https://i.ibb.co/SDWZFh23/malvin-xd.jpg`,
+        url: `https://files.catbox.moe/4kux2y.jpg`,
       },
       caption: up,
     });
-    malvin.sendMessage("263780934873@s.whatsapp.net", {
-      image: {
-        url: `https://i.ibb.co/SDWZFh23/malvin-xd.jpg`,
-      },
-      caption: up1,
-    });
-
-    // ====== auto group join code  ======
-    const inviteCode = "Dx7HbtW7Cf12iCVjJBpD0x?mode=ac_t"; // group invite code 
-    try {
-      await malvin.groupAcceptInvite(inviteCode);
-      console.log("✅ 𝗠𝗔𝗟𝗨 𝗫𝗗 joined the WhatsApp group successfully.");
-    } catch (err) {
-      console.error("❌ Failed to join WhatsApp group:", err.message);
-    }
-  }
-}); 
 
   malvin.ev.on("creds.update", saveCreds);
 
@@ -465,7 +447,7 @@ malvin.ev.on('messages.delete', async (item) => {
 }
 
 app.get("/", (req, res) => {
-  res.send("hey, 𝗠𝗔𝗟𝗨 𝗫𝗗 started✅");
+  res.send("hey, agni started✅");
 });
 app.listen(port, () =>
   console.log(`Server listening on port http://localhost:${port}`)
