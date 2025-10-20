@@ -1,5 +1,5 @@
-const { lite } = require('../lite');
-const config = require("../settings");
+const { cmd } = require('../command');
+const config = require("../config");
 
 // Configurable lists
 const badWords = [
