@@ -5,7 +5,7 @@ const { cmd } = require('../command')
 
 
 //auto recording
-command({
+cmd({
   on: "body"
 },    
 async (conn, mek, m, { from, body, isOwner }) => {       
