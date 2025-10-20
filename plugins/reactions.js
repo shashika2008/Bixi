@@ -1,4 +1,4 @@
-const { lite } = require("../lite");
+const { cmd } = require("../commands");
 const { fetchGif, gifToVideo } = require("../lib/fetchGif");
 const axios = require("axios");
 
