@@ -1,5 +1,5 @@
-const { lite } = require("../lite");
-const config = require('../settings');
+const { cmd } = require("../commands");
+const config = require('../config');
 
 lite({
   pattern: "compatibility",
