@@ -16,11 +16,12 @@
 
 # `Owner`
 
- <a href="https://github.com/username"><img src="https://files.catbox.moe/85w8aq.jpg" width="300" height="300" alt="ₚₒwₑᵣₑd by ₛₕₐₛₕᵢₖₐ dᵢₗₛₕₐₙ"/></a>
+ <a href = "#">
+ <img src="https://files.catbox.moe/85w8aq.jpg" width="300" height="300">
 
  
 <img src="https://i.imgur.com/dBaSKWF.gif" height="90" width="100%">
-
+</img>
 
 ## 𝐃𝐄𝐏𝐋𝐎𝐘 𝐒𝐄𝐓𝐔𝐏 ↕️
 
