@@ -1,7 +1,7 @@
 const { cmd } = require("../commands");
 const config = require('../config');
 
-lite({
+cmd({
   pattern: "compatibility",
   alias: ["friend", "fcheck"],
   desc: "Calculate the compatibility score between two users.",
@@ -41,7 +41,7 @@ lite({
   }
 });
 
-  lite({
+  cmd({
   pattern: "aura",
   desc: "Calculate aura score of a user.",
   category: "fun",
@@ -78,7 +78,7 @@ lite({
   }
 });
 
-lite({
+cmd({
     pattern: "roast",
     desc: "Roast someone ",
     category: "fun",
@@ -173,7 +173,7 @@ lite({
     await conn.sendMessage(mek.chat, { text: message, mentions: [mek.sender, mentionedUser] }, { quoted: mek });
 });
 
-lite({
+cmd({
     pattern: "8ball",
     desc: "Magic 8-Ball gives answers",
     category: "fun",
@@ -194,7 +194,7 @@ async (conn, mek, m, { from, q, reply }) => {
     reply(`🎱 *Magic 8-Ball says:* ${answer}`);
 });
 
-lite({
+cmd({
     pattern: "compliment",
     desc: "Give a nice compliment",
     category: "fun",
@@ -237,7 +237,7 @@ lite({
     await conn.sendMessage(mek.chat, { text: message, mentions: [mek.sender, mentionedUser].filter(Boolean) }, { quoted: mek });
 });
 
-lite({
+cmd({
     pattern: "lovetest",
     desc: "Check love compatibility between two users",
     category: "fun",
@@ -268,7 +268,7 @@ lite({
     await conn.sendMessage(mek.chat, { text: message, mentions: [user1, user2] }, { quoted: mek });
 }); 
 
-lite(
+cmd(
     {
         pattern: "emoji",
         desc: "Convert text into emoji form.",
