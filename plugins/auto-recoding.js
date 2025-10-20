@@ -1,11 +1,11 @@
 const fs = require('fs');
 const path = require('path');
-const config = require('../settings')
-const {lite , commands} = require('../lite')
+const config = require('../config')
+const { cmd } = require('../command')
 
 
 //auto recording
-lite({
+command({
   on: "body"
 },    
 async (conn, mek, m, { from, body, isOwner }) => {       
