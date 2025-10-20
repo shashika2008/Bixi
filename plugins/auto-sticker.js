@@ -1,10 +1,10 @@
 
 const fs = require('fs');
 const path = require('path');
-const config = require('../settings');
-const { lite } = require('../lite');
+const config = require('../config');
+const { cmd } = require('../command');
 
-lite({
+cmd({
   on: "body"
 },
 async (conn, mek, m, { from, body }) => {
