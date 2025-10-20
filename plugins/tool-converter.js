@@ -1,6 +1,6 @@
 const converter = require('../data/converter');
 const stickerConverter = require('../data/sticker-converter');
-const { lite } = require('../commands');
+const { lite } = require('../command');
 
 lite({
     pattern: 'convert',
