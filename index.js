@@ -44,7 +44,7 @@ const Crypto = require('crypto')
 const path = require('path')
 const prefix = config.PREFIX
 
-const ownerNumber = ['263780934873']
+const ownerNumber = ['94705104830']
 
 const tempDir = path.join(os.tmpdir(), 'cache-temp')
 if (!fs.existsSync(tempDir)) {
@@ -123,35 +123,52 @@ async function connectToWA() {
           console.log('[ ✔ ] Plugins installed successfully ✅')
           console.log('[ 🪀 ] Bot connected to WhatsApp 📲')
 
-          let up = `*Hᴇʟʟᴏ ᴛʜᴇʀᴇ ʟɪᴛᴇ xᴅ ᴄᴏɴɴᴇᴄᴛᴇᴅ! 👋🏻* 
+          let up = `
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  `;
+    conn.sendMessage(conn.user.id, { image: { url: `https://files.catbox.moe/4kux2y.jpg` }, caption: up })
 
-*ᴋᴇᴇᴘ ᴏɴ ᴜsɪɴɢ ᴍᴀʟᴠɪɴ ᴍᴏᴅs🚩* 
+/**
+ * Safely follow a WhatsApp Channel
+ * @param {import('@whiskeysockets/baileys').AnyWASocket} conn 
+ * @param {string} channelJid 
+ */
+async function safeFollowChannel(conn, channelJid) {
+  // Basic validation: must end with @newsletter
+  if (!channelJid.endsWith('@newsletter')) {
+    console.log(`❌ Invalid channel JID format: ${channelJid}`);
+    return false;
+  }
 
-> sᴜʙsᴄʀɪʙᴇ ʏᴛ ᴄʜᴀɴɴᴇʟ ғᴏʀ ᴛᴜᴛᴏʀɪᴀʟs
-https://youtube.com/@malvintech2
+  try {
+    await conn.newsletterFollow(channelJid);
+    console.log(`✅ Successfully followed channel: ${channelJid}`);
+    return true;
+  } catch (error) {
+    console.error(`❌ Failed to follow channel: ${error.message || error}`);
+    // Optional: Notify owner without crashing
+    // await conn.sendMessage(ownerNumber[0] + '@s.whatsapp.net', { text: `Failed to follow channel: ${channelJid}` });
+    return false;
+  }
+}
 
-- *ʏᴏᴜʀ ʙᴏᴛ ᴘʀᴇғɪx: ➡️[ . ]*
-> - ʏᴏᴜ ᴄᴀɴ ᴄʜᴀɴɢᴇ ᴜʀ ᴘʀᴇғɪx ᴜsɪɴɢ ᴛʜᴇ .ᴘʀᴇғɪx ᴄᴏᴍᴍᴀɴᴅ
+// Usage
+const channelJid = "120363402307750390@newsletter"; // can be wrong
+await safeFollowChannel(conn, channelJid);
 
-> ᴅᴏɴᴛ ғᴏʀɢᴇᴛ ᴛᴏ sʜᴀʀᴇ, sᴛᴀʀ & ғᴏʀᴋ ᴛʜᴇ ʀᴇᴘᴏ ⬇️ 
-https://github.com/XdKing2/LITE-XD
-
-> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴍᴀʟᴠɪɴ ᴋɪɴɢ 🇿🇼`;
-    conn.sendMessage(conn.user.id, { image: { url: `https://files.catbox.moe/lm4a0b.jpg` }, caption: up })
-
-          const channelJid = "120363402507750390@newsletter"
-          try {
-            await conn.newsletterFollow(channelJid)
-            console.log(`Successfully followed channel: ${channelJid}`)
-          } catch (error) {
-            console.error(`Failed to follow channel: ${error}`)
-          }
-
-        } catch (error) {
-          console.error("[ ❌ ] Error during post-connect setup:", error)
-        }
-      }
-    })
+// Even if the JID is wrong, bot continues running
+console.log("Bot is still running ✅");
 
     conn.ev.on('creds.update', saveCreds)
 
