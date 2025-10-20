@@ -42,7 +42,7 @@ cmd(
 ${info.url}
 
 ━━━━━━━━━━━━━━━━━━
-*ᴍᴀʟᴠɪɴ ᴛᴇᴄʜ🪀*
+*𝐀𝐆𝐍𝐈*
       `.trim();
 
       await malvin.sendMessage(
@@ -84,7 +84,7 @@ ${info.url}
         {
           video: buffer,
           mimetype: "video/mp4",
-          caption: `🎥 *${title}*\n\nⒸ ALL RIGHTS RESERVED 𝗠𝗔𝗟𝗨 𝗫𝗗`,
+          caption: `🎥 *${title}*\n\nⒸ ALL RIGHTS RESERVED 𝐀𝐆𝐍𝐈`,
         },
         { quoted: mek }
       );
