@@ -789,45 +789,41 @@ if (!isReact && config.CUSTOM_REACT === 'true') {
                     };;;;\nitem4.X-ABLabel:Region\nEND:VCARD`,
                 });
             }
-            conn.sendMessage(
-                jid,
-                {
-                    contacts: {
-                        displayName: `${list.length} Contact`,
-                        contacts: list,
-                    },
-                    ...opts,
-                },
-                { quoted },
-            );
-        };
+        // ... Baileys setup code ...
 
-        // Status aka brio
-        conn.setStatus = status => {
-            conn.query({
-                tag: 'iq',
-                attrs: {
-                    to: '@s.whatsapp.net',
-                    type: 'set',
-                    xmlns: 'status',
-                },
-                content: [
-                    {
-                        tag: 'status',
-                        attrs: {},
-                        content: Buffer.from(status, 'utf-8'),
-                    },
-                ],
-            });
-            return status;
-        };
-    conn.serializeM = mek => sms(conn, mek, store);
-  }
-  
-  app.get("/", (req, res) => {
-  res.send("LITE-XD STARTED ✅");
+store.bind(conn.ev);
+conn.ev.on('creds.update', saveCreds);
+conn.ev.on('messages.upsert', async m => {
+  // your message handler here
+});
+
+// helper functions
+conn.sendContact = async (jid, list, quoted, opts = {}) => {
+  conn.sendMessage(
+    jid,
+    {
+      contacts: {
+        displayName: `${list.length} Contact`,
+        contacts: list,
+      },
+      ...opts,
+    },
+    { quoted },
+  );
+};
+
+conn.setStatus = status => {
+  conn.query({
+    tag: 'iq',
+    attrs: { to: '@s.whatsapp.net', type: 'set', xmlns: 'status' },
+    content: [{ tag: 'status', attrs: {}, content: Buffer.from(status, 'utf-8') }],
   });
-  app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
-  setTimeout(() => {
-  connectToWA()
-  }, 4000);
+  return status;
+};
+
+// express web server
+app.get("/", (req, res) => res.send("agni STARTED ✅"));
+app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
+
+// auto reconnect
+setTimeout(() => connectToWA(), 4000);
