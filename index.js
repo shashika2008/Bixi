@@ -68,7 +68,7 @@ setInterval(clearTempDir, 5 * 60 * 1000)
 //===================SESSION-AUTH============================
 if (!fs.existsSync(__dirname + '/sessions/creds.json')) {
   if (!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
-  const sessdata = config.SESSION_ID.replace("lite~", '')
+  const sessdata = config.SESSION_ID.replace("suho~", '')
   const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
   filer.download((err, data) => {
     if (err) throw err
@@ -123,20 +123,19 @@ async function connectToWA() {
           console.log('[ ✔ ] Plugins installed successfully ✅')
           console.log('[ 🪀 ] Bot connected to WhatsApp 📲')
 
-          let up = `
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  `;
+          let up = `*welcome to AGNI BOT*
+╭━━━〔 ♻️ ＡＧＮＩ ♻️ 〕━━━╮  
+┃ ☘️ *OWNER:* Shashika Dilshan  
+┃ ☘️ *MODE:* ᴘᴜʙʟɪᴄ ⚔️  
+┃ ☘️ *SYSTEM:* ᴏɴʟɪɴᴇ ✅  
+┃ ☘️ *UPTIME:* \${runtime}  
+┃ ☘️ *PING:* \${latency} ms  
+┃ ☘️ *COUNTRY:* ${country}  
+┃ 🤫🤫🤫🤫🤫🤫🤫🤫🤫🤫🤫 
+╰━━━━━━━━━━━━━━━━━━━━━━━╯  
+ 
+🔥  ＡＧＮＩ 𝐈𝐒 connected  🔥  
+🖤 “powered by shashika dilshan” 🖤 `;
     conn.sendMessage(conn.user.id, { image: { url: `https://files.catbox.moe/4kux2y.jpg` }, caption: up })
 
 /**
