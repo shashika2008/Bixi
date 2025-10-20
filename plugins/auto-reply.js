@@ -1,10 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 const config = require('../settings')
-const {lite , commands} = require('../lite')
+const { cmd } = require('../command')
 
 //auto reply 
-lite({
+cmd({
   on: "body"
 },    
 async (conn, mek, m, { from, body, isOwner }) => {
