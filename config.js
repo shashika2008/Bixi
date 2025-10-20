@@ -23,7 +23,7 @@ getCountry().then(name => country = name);
 //================================================you can edit ===============================================≠========≠====================
 
 module.exports = {
-    SESSION_ID: process.env.SESSION_ID || "",
+    SESSION_ID: process.env.SESSION_ID || "suho~nZ1XVaZC#DyFPXKzSWjfzu8hsHwo5gxihYI6k5KImDb3CaR0AVNo",
     // add your Session Id make sure it starts with lite~
 
     PREFIX: process.env.PREFIX || ".",
