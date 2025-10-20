@@ -34,7 +34,7 @@ cmd({
     if (!participants || participants.length === 0) {
       return reply("There are no members in this group.");
     }
-    let tagMessage = "*KAVI-MD Mentions : 🔖*\n\n";
+    let tagMessage = "*𝐀𝐆𝐍𝐈 Mentions : 🔖*\n\n";
     let mentions = [];
 
     for (let participant of participants) {
