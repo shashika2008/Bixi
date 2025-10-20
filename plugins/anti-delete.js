@@ -1,4 +1,4 @@
-const { lite } = require('../lite');
+const { cmd } = require('../command');
 const { getAnti, setAnti } = require('../data/antidel');
 
 lite({
